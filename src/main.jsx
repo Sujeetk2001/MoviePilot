@@ -6,6 +6,7 @@ import Favourites from './Pages/Favourites'
 import MovieDetail from './Pages/MovieDetail'
 import './index.css'
 import App from './App.jsx'
+import {FavouriteProvider} from './context/FavouriteContext'
 
 const router = createBrowserRouter([
   {
@@ -29,5 +30,7 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <FavouriteProvider>
+    <RouterProvider router={router} />
+  </FavouriteProvider>
 )

@@ -9,7 +9,7 @@ const Home = () => {
     const [movies, setMovies] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [query, setQuery] = useState('day')
+    const [query, setQuery] = useState('batman')
 
 useEffect(() => {
     setLoading(true)
@@ -39,7 +39,7 @@ useEffect(() => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
             {movies.map((movie) => (
-              <MovieCard key={movie.imdbID} Title={movie.Title} Year={movie.Year} Poster={movie.Poster} />
+              <MovieCard key={movie.imdbID} Title={movie.Title} Year={movie.Year} Poster={movie.Poster} imdbID={movie.imdbID} />
             ))}
           </div>
         )}
