@@ -29,7 +29,7 @@ useEffect(() => {
   return (
     <main>
       <SearchBar onSearch={setQuery} />
-        <h1 className='px-10 text-2xl font-bold mt-5'>Popular Searches</h1>
+        <h1 className='px-10 text-2xl font-bold mt-5'>{query} Searches</h1>
       <div>
         {/* Movie cards will go here */}
         {loading ? (

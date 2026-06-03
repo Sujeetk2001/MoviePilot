@@ -3,8 +3,10 @@ import { useParams, useNavigate } from 'react-router'
 import { MoviesDetails } from '../services/MovieApi'
 import Loader from '../components/Loader'
 import ErrorMessage from '../components/ErrorMessage'
+import { useFavourite } from '../context/FavouriteContext'
 
 const MovieDetail = () => {
+  const {favourites, setFavourites} = useFavourite()
   const { id } = useParams()
   const navigate = useNavigate()
   const [movie, setMovie] = useState(null)
@@ -24,6 +26,16 @@ const MovieDetail = () => {
 
   if (loading) return <div className="mt-20"><Loader /></div>
   if (error || !movie) return <ErrorMessage />
+
+  const isFavourite = favourites.some(fav => fav.imdbID === movie.imdbID)
+
+  const handleFavourite = () => {
+    if (isFavourite) {
+      setFavourites(favourites.filter(fav => fav.imdbID !== movie.imdbID))
+    } else {
+      setFavourites([...favourites, movie])
+    }
+  }
 
   return (
     <div className="relative min-h-screen w-full bg-[#07070a]">
@@ -95,8 +107,8 @@ const MovieDetail = () => {
 
             {/* Call to action buttons */}
             <div className="mt-10 flex flex-wrap gap-4">
-               <button className="primaryBtn">
-                  + Add to Favourites
+               <button className="primaryBtn" onClick={handleFavourite}>
+                  {isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
                </button>
             </div>
           </div>
